@@ -3,9 +3,9 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 
 //Team profiles/class
-const intern = require("./lib/Interns");
-const manager = require("./lib/Managers");
-const engineer = require("./lib/Engineers");
+const intern = require("./lib/Intern");
+const manager = require("./lib/Manager");
+const engineer = require("./lib/Engineer");
 
 //Link to page creation
 const generateHTML = require("./src/generateHTML");
