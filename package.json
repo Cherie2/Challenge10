@@ -1,7 +1,29 @@
 {
+  "name": "challenge10",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cherie2/Challenge10.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cherie2/Challenge10/issues"
+  },
+  "homepage": "https://github.com/Cherie2/Challenge10#readme",
   "dependencies": {
-    "bootstrap": "^5.2.2",
-    "inquirer": "^8.2.4",
+    "inquirer": "^8.2.4"
+  },
+  "devDependencies": {
     "jest": "^29.3.1"
   }
 }

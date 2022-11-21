@@ -8,7 +8,7 @@ const manager = require("./lib/Manager");
 const engineer = require("./lib/Engineer");
 
 //Link to page creation
-const generateHTML = require("./src/generateHTML");
+const renderHtml = require("./src/generateHTML");
 
 //Empty array for team members
 const team = [];
@@ -33,8 +33,8 @@ const addManager = () => {
       type: 'input',
       name: 'id',
       message: 'What is the id number of the manager?',
-      confirm: nameInput => {
-        if (name!="") {
+      validate: input => {
+        if (input!="") {
           return true;
         } else {
           console.log("Please enter Manager's ID!");
@@ -46,8 +46,8 @@ const addManager = () => {
       type: 'input',
       name: 'email',
       message: 'What is the email of the manager?',
-      validate: nameInput => {
-        if (nameInput!=" ") {
+      validate: input => {
+        if (input!="") {
           return true;
         } else {
           console.log("Please enter Manager's email!");
@@ -59,8 +59,8 @@ const addManager = () => {
       type: 'input',
       name: 'officeNumber',
       message: 'What is the office number of the manager?',
-      confirm: nameInput => {
-        if (nameInput) {
+      validate: input => {
+        if (input!="") {
           return true;
         } else {
           console.log("Please enter Manager's office number!");
@@ -76,6 +76,7 @@ const addManager = () => {
     team.push(Manager); 
     console.log(Manager); 
     })
+    .then(()=> addEmployee())
 }; 
 
 //Application prompts for adding additional team members
@@ -85,13 +86,13 @@ const addEmployee = ()=>{
       type: 'list',
       name: 'role',
       message: "What is the team member's role?",
-      choices:['Engineer', 'Intern'],
+      choices:['Engineer', 'Intern', 'No Additiional Team Members'],
     },
     {
       type: 'input',
       name: 'name',
       message: "What is the team member's name?",
-      confirm: input => {
+      validate: input => {
         if (input!="") {
           return true;
         } else {
@@ -104,8 +105,8 @@ const addEmployee = ()=>{
       type: 'input',
       name: 'id',
       message: "What is the team member's ID?",
-      confirm: nameInput => {
-        if (name.value!="") {
+      validate: input => {
+        if (input!="") {
           return true;
         } else {
           console.log("Please enter team member's ID!");
@@ -117,8 +118,8 @@ const addEmployee = ()=>{
       type: 'input',
       name: 'email',
       message: "What is the team member's email?",
-      confirm: nameInput => {
-        if (nameInput) {
+      validate: input => {
+        if (input!="") {
           return true;
         } else {
           console.log("Please enter team member's email!");
@@ -131,8 +132,8 @@ const addEmployee = ()=>{
       name: 'GitHub',
       message: "What is the team member's GitHub Username?",
       when: (data) => data.role === "Engineer",
-      confirm: nameInput => {
-        if (nameInput) {
+      validate: input => {
+        if (input!="") {
           return true;
         } else {
           console.log("Please enter team member's GitHub username!");
@@ -145,8 +146,8 @@ const addEmployee = ()=>{
       name: 'school',
       message: "What is the team member's school name?",
       when: (data) => data.role === "Intern",
-      confirm: data => {
-        if (data!="") {
+      validate: input => {
+        if (input!="") {
           return true;
         } else {
           console.log("Please enter team member's school name!");
@@ -170,8 +171,7 @@ const addEmployee = ()=>{
         employee = new engineer(name, id, email, GitHub);
     }
     
-    team.push(employee); 
-    console.log(employee); 
+    team.push(employee);  
     
     if (confirmAddEmployee) {
       return addEmployee(); 
@@ -181,26 +181,15 @@ const addEmployee = ()=>{
   })
 }
 
-const writeFile = data => {
-  fs.writeFile('./dist/index.html', data, err => {
+const writeFile = () => {
+  fs.writeFile('./dist/index.html',  renderHtml(team), err => {
       if (err) {
-          console.log(err);
+          console.log("Unable to create team profile",err);
           return;
       } else {
           console.log("Your team profile has been successfully created!")
       }
   })
-}; 
+}
 
-//Promise to dictate order of events for data input
-addManager()
-  .then(addEmployee)
-  .then(team =>{
-    return generateHTML(team);
-  })
-  .then(page =>{
-    return writeFile(page);
-  })
-  .catch(err => {
-    console.log(err);
-  })
+  addManager();
