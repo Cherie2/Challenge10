@@ -2,9 +2,11 @@
 const Employee = require("../lib/Employee");
 
   test('This should create a new object with name, id, email, and call getRole()', () => {
+    
     //Sample employee info to test code
-    const newEmployee = new Employee('Tom', 1234, 'Tom@gmail.com')
-
+    const newEmployee = new Employee('Tom', 1234, 'Tom@gmail.com');
+    
+    //Values expected to be based offsample employee info
     expect(newEmployee.name).toBe('Tom');
     expect(newEmployee.id).toBe(1234);
     expect(newEmployee.email).toBe("Tom@gmail.com");

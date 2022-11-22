@@ -3,9 +3,9 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 
 //Team profiles/class
-const intern = require("./lib/Intern");
-const manager = require("./lib/Manager");
-const engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
 
 //Link to page creation
 const renderHtml = require("./src/generateHTML");
@@ -68,25 +68,39 @@ const addManager = () => {
         } 
       }
     },
+    {
+      type: 'confirm',
+      name: 'confirmAddEmployee',
+      message: 'Would you like to add more team members?',
+    }
    ])
    .then(managerData => {
-    const  { name, id, email, officeNumber } = managerData; 
-    const Manager = new manager(name, id, email, officeNumber);
+    const  { name, id, email, officeNumber, confirmAddEmployee } = managerData; 
+    const manager = new Manager(name, id, email, officeNumber);
 
-    team.push(Manager); 
-    console.log(Manager); 
+    //Pushes manager to team array
+    team.push(manager); 
+    console.log(manager); 
+    
+     //Confirms if an additional teammate needs to be added or team is complete to finish team array
+    if (confirmAddEmployee) {
+      return addEmployee(); 
+    } else {
+      //Returns team array together 
+      return team.join('');
+    }
     })
     .then(()=> addEmployee())
 }; 
 
 //Application prompts for adding additional team members
-const addEmployee = ()=>{
+const addEmployee = () => {
     return inquirer.prompt ([
     {
       type: 'list',
       name: 'role',
-      message: "What is the team member's role?",
-      choices:['Engineer', 'Intern', 'No Additiional Team Members'],
+      message: "What is the additional team member's role?",
+      choices:['Engineer', 'Intern'],
     },
     {
       type: 'input',
@@ -129,7 +143,7 @@ const addEmployee = ()=>{
     },
     {
       type: 'input',
-      name: 'GitHub',
+      name: 'gitHub',
       message: "What is the team member's GitHub Username?",
       when: (data) => data.role === "Engineer",
       validate: input => {
@@ -162,34 +176,40 @@ const addEmployee = ()=>{
     }
     ])
   .then(employeeData => {
-    const  { name, id, email, school, GitHub, confirmAddEmployee } = employeeData; 
+    const  { name, id, email, school, gitHub, confirmAddEmployee} = employeeData; 
     let employee;
 
+    //Defines employee type-engineer/intern
     if(employeeData.role === "Intern"){
-        employee = new intern(name, id, email, school);
+        employee = new Intern(name, id, email, school);
     }else if(employeeData.role === "Engineer"){
-        employee = new engineer(name, id, email, GitHub);
+        employee = new Engineer(name, id, email, gitHub);
     }
     
+    //Pushes employee(intern/engineer) to team array
     team.push(employee);  
-    
+
+    //Confirms if an additional teammate needs to be added or team is complete to finish team array
     if (confirmAddEmployee) {
-      return addEmployee(); 
+      return addEmployee(team); 
     } else {
-      return team;
+      //Returns team array together 
+      return team.join('');
     }
   })
-}
+  .then(()=> writeFile())
+}; 
 
+//Function to save file and run generateHTML () creating profile
 const writeFile = () => {
   fs.writeFile('./dist/index.html',  renderHtml(team), err => {
       if (err) {
           console.log("Unable to create team profile",err);
-          return;
       } else {
-          console.log("Your team profile has been successfully created!")
+          console.log("Your Team Member Profile has been successfully created!")
       }
   })
 }
 
-  addManager();
+//Initializes app
+addManager();
