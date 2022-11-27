@@ -40,6 +40,7 @@ In completing this project, I have learned the basic concepts of node.js while u
 ## Installation
 
 This application requires the user to install node.js, inquirer package(v8.2.4).
+
 *Optional- if user wants to run tests, jest must be installed*
 
 ## Usage
