@@ -9,6 +9,8 @@ const Engineer = require("./lib/Engineer");
 
 //Link to page creation
 const renderHtml = require("./src/generateHTML");
+// const { default: InputPrompt } = require("inquirer/lib/prompts/input");
+// const { default: ConfirmPrompt } = require("inquirer/lib/prompts/confirm");
 
 //Empty array for team members
 const team = [];
@@ -68,30 +70,37 @@ const addManager = () => {
         } 
       }
     },
-    {
-      type: 'confirm',
-      name: 'confirmAddEmployee',
-      message: 'Would you like to add more team members?',
-    }
    ])
    .then(managerData => {
-    const  { name, id, email, officeNumber, confirmAddEmployee } = managerData; 
+    const  { name, id, email, officeNumber } = managerData; 
     const manager = new Manager(name, id, email, officeNumber);
 
     //Pushes manager to team array
     team.push(manager); 
     console.log(manager); 
-    
-     //Confirms if an additional teammate needs to be added or team is complete to finish team array
-    if (confirmAddEmployee) {
-      return addEmployee(); 
-    } else {
-      //Returns team array together 
-      return team.join('');
-    }
     })
-    .then(()=> addEmployee())
+    .then(()=> confirmAddEmployees())
 }; 
+
+//Function that confirms if an additional teammate needs to be added or team is complete
+const confirmAddEmployees = () => {
+  return inquirer.prompt ([
+    {
+    type: 'confirm',
+    name: 'confirmAddEmployee',
+    message: 'Would you like to add more team members?',
+    }    
+  ]) 
+   .then(answer=>{
+    const  { confirmAddEmployee } = answer; 
+     if (confirmAddEmployee) {  
+        return addEmployee();
+      } else {  
+        console.log("Updating Profile");
+        return writeFile();  
+      }
+   })
+};
 
 //Application prompts for adding additional team members
 const addEmployee = () => {
