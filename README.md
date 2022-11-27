@@ -14,11 +14,12 @@
   - [Credits](#Credits)
   
 ## Motivation
-    The motivation for this project is to provide users with a convenient and efficient way to produce an HTML file with a project's team members and each member's specific information. The HTML file's template includes sections such as the team member's role, name, email, and ID. Additional information such as office number, GitHub username, and Educational Institution is provided depending on what the team member's role is. 
 
-    In completing this project, I have learned the basic concepts of node.js while utilizing the inquirer and jest packages. The importance of writing test for applications was made clear when structuring the application.  
+The motivation for this project is to provide users with a convenient and efficient way to produce an HTML file with a project's team members and each member's specific information. The HTML file's template includes sections such as the team member's role, name, email, and ID. Additional information such as office number, GitHub username, and Educational Institution is provided depending on what the team member's role is. 
 
-[Screenshot](images/TeamMemberProfile.html.png)
+In completing this project, I have learned the basic concepts of node.js while utilizing the inquirer and jest packages. The importance of writing test for applications was made clear when structuring the application.  
+
+![Screenshot](./images/TeamMemberProfile.html.png)
 
 ## Video Demonstration
 
@@ -37,26 +38,31 @@
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 ## Installation
-    This application requires the user to install node.js, inquirer package(v8.2.4).
-    *Optional- if user wants to run tests, jest must be installed*
+
+This application requires the user to install node.js, inquirer package(v8.2.4).
+*Optional- if user wants to run tests, jest must be installed*
 
 ## Usage
-    Once application code/files are transferred to preferred text editor, user opens command-line and runs the command node index.js. The application will then present prompts and user is required to answer them. After all questions are answered, a HTML file will be generated and reflect the team members added.
+
+Once application code/files are transferred to preferred text editor, user opens command-line and runs the command node index.js. The application will then present prompts and user is required to answer them. After all questions are answered, a HTML file will be generated and reflect the team members added.
 
 ## License
-    Licensed under the [MIT](https://opensource.org/licenses/MIT) license
+    
+Licensed under the [MIT](https://opensource.org/licenses/MIT) license
 
 ## Contribution
-    Provide any suggestions to the email listed below.
+
+Provide any suggestions to the email listed below.
 
 ## Tests
-    Th
-## Questions
- *Any questions please contact me through email*
-  
-  [Cherie2](https://github.com/Cherie2)
 
-  cwalk280@yahoo.com
+To run this application, tests are not required.
+
+## Questions
+
+*Any questions please contact me through email*
+
+cwalk280@yahoo.com
 
 ## Credits
 
