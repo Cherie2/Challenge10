@@ -92,7 +92,7 @@ const generateHTML = function (employee){
 }
 module.exports = (team)=>{
     return `
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
