@@ -9,8 +9,6 @@ const Engineer = require("./lib/Engineer");
 
 //Link to page creation
 const renderHtml = require("./src/generateHTML");
-// const { default: InputPrompt } = require("inquirer/lib/prompts/input");
-// const { default: ConfirmPrompt } = require("inquirer/lib/prompts/confirm");
 
 //Empty array for team members
 const team = [];

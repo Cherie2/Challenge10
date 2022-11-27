@@ -1,5 +1,3 @@
-//const Employee = require("../lib/Employee")
-
 //Function to create employee cards and join together on page
 const generateHTML = function (employee){
 
